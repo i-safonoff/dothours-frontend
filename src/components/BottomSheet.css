@@ -1,0 +1,28 @@
+.sheet-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(28, 23, 18, 0.45);
+  z-index: 50;
+}
+
+.sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 51;
+  background: var(--surface);
+  border-radius: 28px 28px 0 0;
+  padding: 12px 24px 32px;
+  max-height: 78%;
+  overflow-y: auto;
+  box-shadow: 0 -12px 40px rgba(28, 23, 18, 0.25);
+}
+
+.sheet-handle {
+  width: 40px;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--ink-faint);
+  margin: 0 auto 18px;
+}
