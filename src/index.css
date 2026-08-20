@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg: #FBF3E7;
+  --bg-soft: #F5EADA;
+  --surface: #FFFDF9;
+  --surface-2: #FFF8ED;
+  --ink: #241A10;
+  --ink-soft: #8C7C68;
+  --ink-faint: #C7B8A4;
+  --line: #EDE0CC;
+  --dot: rgba(36, 26, 16, 0.14);
+
+  --coral: #FF5A45;
+  --coral-deep: #E8461F;
+  --sun: #FFB627;
+  --sun-deep: #F09400;
+  --leaf: #4CB944;
+  --leaf-deep: #349A34;
+  --sky: #2AA9E0;
+  --sky-deep: #1885B5;
+  --grape: #9B6BFF;
+  --grape-deep: #7C4CE0;
+  --pink: #FF6FA5;
+  --pink-deep: #E24F87;
+
+  --shadow-sm: 0 2px 8px rgba(44, 33, 23, 0.06);
+  --shadow-md: 0 8px 24px rgba(44, 33, 23, 0.10);
+  --shadow-lg: 0 16px 40px rgba(44, 33, 23, 0.16);
+  --shadow-btn: 0 6px 0 rgba(0, 0, 0, 0.15);
+
+  --radius-sm: 14px;
+  --radius-md: 20px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --font-display: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overscroll-behavior: none;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  background: #E9DFCE;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  margin: 0;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  font-family: var(--font-body);
+  border: none;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--sky);
+  outline-offset: 2px;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  scrollbar-width: none;
+}
+
+#root {
+  height: 100%;
+}
+
+.screen-fade {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  width: 100%;
+}
