@@ -1,0 +1,92 @@
+.post-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.post-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.post-card-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.post-card-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 13px;
+  flex: 0 0 auto;
+}
+
+.post-card-author-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.post-card-name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 13.5px;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
+
+.post-card-time {
+  font-size: 11px;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+.post-card-delete {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.post-card-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink);
+  margin-bottom: 12px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.post-card-actions {
+  display: flex;
+  gap: 18px;
+}
+
+.post-card-action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+}
