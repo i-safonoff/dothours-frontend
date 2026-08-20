@@ -1,0 +1,243 @@
+.city {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.city-header {
+  flex: 0 0 auto;
+  padding: 6px 24px 14px;
+}
+
+.city-header h2 {
+  font-size: 24px;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.city-header p {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+
+.city-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 20px 90px;
+}
+
+.city-error,
+.city-empty {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  font-weight: 600;
+  text-align: center;
+  padding: 12px 0;
+}
+
+.city-error {
+  color: var(--coral-deep);
+}
+
+.monument-card {
+  background: linear-gradient(165deg, #2B2117 0%, #3A2C1D 100%);
+  border-radius: var(--radius-lg);
+  padding: 18px 18px 16px;
+  margin-bottom: 22px;
+  box-shadow: var(--shadow-md);
+}
+
+.monument-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.monument-eyebrow {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.monument-level {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 19px;
+  color: #fff;
+}
+
+.monument-avatars {
+  display: flex;
+}
+
+.monument-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 10px;
+  margin-left: -8px;
+  box-shadow: 0 0 0 2.5px #2B2117;
+}
+
+.monument-avatar:first-child {
+  margin-left: 0;
+}
+
+.monument-building {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 6px 0 4px;
+}
+
+.monument-caption {
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 12px;
+}
+
+.monument-caption strong {
+  color: #fff;
+}
+
+.monument-track {
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.monument-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, #FFB627, #FF9600);
+}
+
+.monument-remaining {
+  display: block;
+  text-align: center;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.city-districts-title {
+  font-size: 17px;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.city-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.district-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 14px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.district-level {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.district-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--ink);
+  margin-top: 4px;
+}
+
+.district-hours {
+  font-size: 11.5px;
+  color: var(--ink-soft);
+  margin-bottom: 8px;
+}
+
+.district-track {
+  width: 100%;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-soft);
+  overflow: hidden;
+}
+
+.district-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+}
+
+.district-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 8px;
+}
+
+.district-detail-building {
+  margin-bottom: 6px;
+}
+
+.district-detail h3 {
+  font-size: 20px;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.district-detail-sub {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+}
+
+.district-detail-track {
+  width: 100%;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-soft);
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.district-detail-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+}
+
+.district-detail-hint {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  font-weight: 600;
+}

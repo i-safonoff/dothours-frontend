@@ -1,0 +1,115 @@
+.goalselect {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 24px 0;
+  min-height: 0;
+}
+
+.goalselect-header {
+  position: relative;
+}
+
+.goalselect-close {
+  position: absolute;
+  top: -2px;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.goalselect-header h2 {
+  font-size: 26px;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.goalselect-header p {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+}
+
+.goalselect-grid {
+  flex: 1;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding-bottom: 16px;
+}
+
+.goal-card {
+  position: relative;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 20px 14px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  box-shadow: var(--shadow-sm);
+  text-align: left;
+}
+
+.goal-card-shape {
+  position: relative;
+  width: 36px;
+  height: 36px;
+}
+
+.goal-card-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.goal-card-sub {
+  font-size: 12.5px;
+  margin-top: -6px;
+}
+
+.goal-card-check {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.goalselect-footer {
+  flex: 0 0 auto;
+  padding: 12px 0 24px;
+}
+
+.goalselect-error {
+  font-size: 12.5px;
+  color: var(--coral-deep);
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.goalselect-cta {
+  width: 100%;
+  padding: 17px;
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 16px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.25);
+}
