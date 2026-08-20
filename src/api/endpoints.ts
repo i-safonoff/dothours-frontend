@@ -3,12 +3,15 @@ import type {
   ApiBuildingFamily,
   ApiCategory,
   ApiCityBuilding,
+  ApiComment,
   ApiFriend,
   ApiFriendRequest,
   ApiPairedTask,
+  ApiPost,
   ApiTimeEntry,
   ApiTimeEntrySummary,
   ApiUser,
+  ApiUserPublic,
   ApiUserStats,
   AuthResponse,
   BuildingFamilyKey,
@@ -25,6 +28,20 @@ export const authApi = {
 export const usersApi = {
   stats: () => api.get<ApiUserStats>('/users/me/stats'),
   searchByEmail: (email: string) => api.get<ApiUser>(`/users/search?email=${encodeURIComponent(email)}`),
+  get: (userId: string) => api.get<ApiUserPublic>(`/users/${userId}`),
+  updateMe: (payload: { name?: string; status?: string; avatar_color?: string; daily_goal_minutes?: number }) =>
+    api.patch<ApiUser>('/users/me', payload),
+};
+
+export const postsApi = {
+  feed: (authorId?: string) => api.get<ApiPost[]>(`/posts${authorId ? `?author_id=${authorId}` : ''}`),
+  create: (text: string) => api.post<ApiPost>('/posts', { text }),
+  remove: (postId: string) => api.delete<void>(`/posts/${postId}`),
+  like: (postId: string) => api.post<ApiPost>(`/posts/${postId}/like`),
+  unlike: (postId: string) => api.delete<ApiPost>(`/posts/${postId}/like`),
+  comments: (postId: string) => api.get<ApiComment[]>(`/posts/${postId}/comments`),
+  addComment: (postId: string, text: string) => api.post<ApiComment>(`/posts/${postId}/comments`, { text }),
+  removeComment: (commentId: string) => api.delete<void>(`/comments/${commentId}`),
 };
 
 export const categoriesApi = {

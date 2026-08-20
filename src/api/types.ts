@@ -7,7 +7,17 @@ export interface ApiUser {
   email: string;
   name: string;
   initials: string;
+  avatar_color: string;
+  status: string;
   daily_goal_minutes: number;
+}
+
+export interface ApiUserPublic {
+  id: string;
+  name: string;
+  initials: string;
+  avatar_color: string;
+  status: string;
 }
 
 export interface AuthResponse {
@@ -89,6 +99,24 @@ export interface ApiParticipant {
   user_id: string;
   name: string;
   minutes_logged: number;
+}
+
+export interface ApiPost {
+  id: string;
+  author: ApiUserPublic;
+  text: string;
+  created_at: string;
+  likes_count: number;
+  comments_count: number;
+  liked_by_me: boolean;
+}
+
+export interface ApiComment {
+  id: string;
+  post_id: string;
+  author: ApiUserPublic;
+  text: string;
+  created_at: string;
 }
 
 export interface ApiPairedTask {
