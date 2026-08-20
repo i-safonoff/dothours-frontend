@@ -9,6 +9,8 @@ import Tracker from './screens/Tracker';
 import City from './screens/City';
 import Friends from './screens/Friends';
 import PairedTasks from './screens/PairedTasks';
+import Feed from './screens/Feed';
+import Profile from './screens/Profile';
 import { AuthProvider, useAuth } from './api/AuthContext';
 import { categoriesApi } from './api/endpoints';
 
@@ -19,6 +21,7 @@ function AppShell() {
   const [stage, setStage] = useState<Stage>('onboarding');
   const [tab, setTab] = useState<TabId>('tracker');
   const [editingGoals, setEditingGoals] = useState(false);
+  const [viewedProfileId, setViewedProfileId] = useState<string | null>(null);
 
   useEffect(() => {
     if (loading) return;
@@ -31,7 +34,20 @@ function AppShell() {
       .list()
       .then((cats) => setStage(cats.length > 0 ? 'app' : 'goals'))
       .catch(() => setStage('goals'));
-  }, [user, loading]);
+    // Only re-run on an actual login/logout, not on in-place profile edits
+    // (updateUser() replaces the user object, which would otherwise re-trigger this).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id, loading]);
+
+  function openProfile(userId: string) {
+    setViewedProfileId(userId);
+    setTab('profile');
+  }
+
+  function changeTab(next: TabId) {
+    if (next === 'profile') setViewedProfileId(null);
+    setTab(next);
+  }
 
   if (loading) {
     return (
@@ -109,6 +125,11 @@ function AppShell() {
                   <Tracker onEditGoals={() => setEditingGoals(true)} />
                 </motion.div>
               )}
+              {tab === 'feed' && (
+                <motion.div key="feed" className="screen-fade" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
+                  <Feed onOpenProfile={openProfile} />
+                </motion.div>
+              )}
               {tab === 'city' && (
                 <motion.div key="city" className="screen-fade" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
                   <City />
@@ -116,7 +137,7 @@ function AppShell() {
               )}
               {tab === 'friends' && (
                 <motion.div key="friends" className="screen-fade" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
-                  <Friends />
+                  <Friends onOpenProfile={openProfile} />
                 </motion.div>
               )}
               {tab === 'paired' && (
@@ -124,27 +145,21 @@ function AppShell() {
                   <PairedTasks />
                 </motion.div>
               )}
+              {tab === 'profile' && (
+                <motion.div key="profile" className="screen-fade" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
+                  <Profile
+                    userId={viewedProfileId}
+                    onBack={() => setViewedProfileId(null)}
+                    onLogout={() => {
+                      logout();
+                      setStage('onboarding');
+                    }}
+                  />
+                </motion.div>
+              )}
             </AnimatePresence>
 
-            <TabBar active={tab} onChange={setTab} />
-
-            <button
-              onClick={() => {
-                logout();
-                setStage('onboarding');
-              }}
-              style={{
-                position: 'absolute',
-                top: 6,
-                right: 16,
-                fontSize: 11,
-                fontWeight: 700,
-                color: 'var(--ink-faint)',
-                zIndex: 5,
-              }}
-            >
-              выйти
-            </button>
+            <TabBar active={tab} onChange={changeTab} />
 
             <AnimatePresence>
               {editingGoals && (

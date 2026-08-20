@@ -2,16 +2,26 @@ import type { ReactElement } from 'react';
 import { motion } from 'framer-motion';
 import './TabBar.css';
 
-export type TabId = 'tracker' | 'city' | 'friends' | 'paired';
+export type TabId = 'tracker' | 'feed' | 'city' | 'friends' | 'paired' | 'profile';
 
 const TABS: { id: TabId; label: string; icon: (active: boolean) => ReactElement }[] = [
   {
     id: 'tracker',
     label: 'Трекер',
     icon: (a) => (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
         <circle cx="12" cy="12" r="8.5" stroke={a ? '#fff' : 'var(--ink-soft)'} strokeWidth="2" />
         <path d="M12 7.5V12L15 14" stroke={a ? '#fff' : 'var(--ink-soft)'} strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    id: 'feed',
+    label: 'Лента',
+    icon: (a) => (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <rect x="3.5" y="4.5" width="17" height="6" rx="2" fill={a ? '#fff' : 'var(--ink-soft)'} />
+        <rect x="3.5" y="13.5" width="17" height="6" rx="2" fill={a ? '#fff' : 'var(--ink-soft)'} opacity="0.7" />
       </svg>
     ),
   },
@@ -19,7 +29,7 @@ const TABS: { id: TabId; label: string; icon: (active: boolean) => ReactElement 
     id: 'city',
     label: 'Город',
     icon: (a) => (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
         <rect x="3.5" y="11" width="6" height="9.5" rx="1.4" fill={a ? '#fff' : 'var(--ink-soft)'} />
         <rect x="9.5" y="6" width="6" height="14.5" rx="1.4" fill={a ? '#fff' : 'var(--ink-soft)'} />
         <rect x="15.5" y="9.5" width="5.5" height="11" rx="1.4" fill={a ? '#fff' : 'var(--ink-soft)'} />
@@ -30,7 +40,7 @@ const TABS: { id: TabId; label: string; icon: (active: boolean) => ReactElement 
     id: 'friends',
     label: 'Друзья',
     icon: (a) => (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
         <circle cx="9" cy="8" r="3.4" fill={a ? '#fff' : 'var(--ink-soft)'} />
         <path d="M2.5 20c0-4 3-6.6 6.5-6.6s6.5 2.6 6.5 6.6" stroke={a ? '#fff' : 'var(--ink-soft)'} strokeWidth="2" strokeLinecap="round" />
         <circle cx="17.5" cy="9" r="2.6" fill={a ? '#fff' : 'var(--ink-soft)'} opacity="0.7" />
@@ -41,12 +51,27 @@ const TABS: { id: TabId; label: string; icon: (active: boolean) => ReactElement 
     id: 'paired',
     label: 'Задания',
     icon: (a) => (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
         <path
           d="M6 4h9a3 3 0 0 1 3 3v13l-4.5-2.5L9 20V7a3 3 0 0 1 3-3"
           stroke={a ? '#fff' : 'var(--ink-soft)'}
           strokeWidth="2"
           strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    id: 'profile',
+    label: 'Профиль',
+    icon: (a) => (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="8.5" r="3.8" fill={a ? '#fff' : 'var(--ink-soft)'} />
+        <path
+          d="M4 20c0-4.4 3.6-7.6 8-7.6s8 3.2 8 7.6"
+          stroke={a ? '#fff' : 'var(--ink-soft)'}
+          strokeWidth="2"
+          strokeLinecap="round"
         />
       </svg>
     ),
