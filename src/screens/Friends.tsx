@@ -40,7 +40,7 @@ function colorFor(id: string) {
   return PALETTE[hash % PALETTE.length];
 }
 
-export default function Friends() {
+export default function Friends({ onOpenProfile }: { onOpenProfile: (userId: string) => void }) {
   const [friends, setFriends] = useState<ApiFriend[]>([]);
   const [incoming, setIncoming] = useState<ApiFriendRequest[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -133,6 +133,8 @@ export default function Friends() {
               viewport={{ once: true, margin: '-60px' }}
               transition={{ delay: i * 0.06, duration: 0.45, type: 'spring', bounce: 0.35 }}
               whileTap={{ scale: 0.97 }}
+              onClick={() => onOpenProfile(f.id)}
+              style={{ cursor: 'pointer' }}
             >
               <div className="friend-avatar-wrap">
                 <MiniRing progress={f.today_minutes / 120} color={color} />
