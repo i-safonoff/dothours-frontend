@@ -4,8 +4,15 @@ import type {
   ApiCategory,
   ApiCityBuilding,
   ApiComment,
+  ApiCompany,
+  ApiCompanyInvite,
+  ApiCompanyMember,
+  ApiCompanyRank,
   ApiFriend,
   ApiFriendRequest,
+  ApiLeaderboardPage,
+  ApiNotification,
+  ApiNotificationPage,
   ApiPairedTask,
   ApiPost,
   ApiTimeEntry,
@@ -15,6 +22,8 @@ import type {
   ApiUserStats,
   AuthResponse,
   BuildingFamilyKey,
+  CompanyRole,
+  LeaderboardPeriod,
   ShapeKind,
 } from './types';
 
@@ -90,4 +99,35 @@ export const pairedTasksApi = {
     due_at: string;
     participant_user_ids: string[];
   }) => api.post<ApiPairedTask>('/paired-tasks', payload),
+};
+
+export const companiesApi = {
+  list: (mine: boolean) => api.get<ApiCompany[]>(`/companies?mine=${mine}`),
+  get: (companyId: string) => api.get<ApiCompany>(`/companies/${companyId}`),
+  create: (payload: { name: string; description?: string; is_public?: boolean }) =>
+    api.post<ApiCompany>('/companies', payload),
+  remove: (companyId: string) => api.delete<void>(`/companies/${companyId}`),
+  city: (companyId: string) => api.get<{ buildings: ApiCityBuilding[] }>(`/companies/${companyId}/city`),
+  members: (companyId: string) => api.get<ApiCompanyMember[]>(`/companies/${companyId}/members`),
+  updateMemberRole: (companyId: string, userId: string, role: CompanyRole) =>
+    api.patch<ApiCompanyMember>(`/companies/${companyId}/members/${userId}`, { role }),
+  removeMember: (companyId: string, userId: string) => api.delete<void>(`/companies/${companyId}/members/${userId}`),
+  invites: (companyId: string) => api.get<ApiCompanyInvite[]>(`/companies/${companyId}/invites`),
+  createInvite: (companyId: string) => api.post<ApiCompanyInvite>(`/companies/${companyId}/invites`, {}),
+  join: (inviteCode: string) => api.post<ApiCompany>('/companies/join', { invite_code: inviteCode }),
+};
+
+export const leaderboardApi = {
+  companies: (period: LeaderboardPeriod, limit = 20, offset = 0) =>
+    api.get<ApiLeaderboardPage>(`/leaderboard/companies?period=${period}&limit=${limit}&offset=${offset}`),
+  companyRank: (companyId: string, period: LeaderboardPeriod) =>
+    api.get<ApiCompanyRank>(`/leaderboard/companies/${companyId}?period=${period}`),
+};
+
+export const notificationsApi = {
+  list: (unreadOnly = false, limit = 30) =>
+    api.get<ApiNotificationPage>(`/notifications?unread_only=${unreadOnly}&limit=${limit}`),
+  unreadCount: () => api.get<{ unread_count: number }>('/notifications/unread-count'),
+  markRead: (notificationId: string) => api.post<ApiNotification>(`/notifications/${notificationId}/read`),
+  markAllRead: () => api.post<{ unread_count: number }>('/notifications/read-all'),
 };

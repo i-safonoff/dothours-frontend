@@ -131,3 +131,85 @@ export interface ApiPairedTask {
   due_at: string;
   participants: ApiParticipant[];
 }
+
+export type CompanyRole = 'owner' | 'admin' | 'member';
+export type LeaderboardPeriod = 'all_time' | 'weekly' | 'monthly';
+export type NotificationKind =
+  | 'daily_reminder'
+  | 'streak_at_risk'
+  | 'paired_task_expired'
+  | 'paired_task_completed'
+  | 'friend_request';
+
+export interface ApiCompany {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  avatar_color: string;
+  is_public: boolean;
+  created_by: string;
+  created_at: string;
+  members_count: number;
+  my_role: CompanyRole | null;
+}
+
+export interface ApiCompanyMember {
+  user_id: string;
+  name: string;
+  initials: string;
+  avatar_color: string;
+  role: CompanyRole;
+  contribution_minutes_total: number;
+  joined_at: string;
+}
+
+export interface ApiCompanyInvite {
+  id: string;
+  company_id: string;
+  code: string;
+  expires_at: string;
+  max_uses: number;
+  uses_count: number;
+}
+
+export interface ApiLeaderboardEntry {
+  rank: number;
+  score: number;
+  company_id: string;
+  name: string;
+  slug: string;
+  avatar_color: string;
+  members_count: number;
+}
+
+export interface ApiLeaderboardPage {
+  period: LeaderboardPeriod;
+  period_key: string;
+  total: number;
+  entries: ApiLeaderboardEntry[];
+}
+
+export interface ApiCompanyRank {
+  period: LeaderboardPeriod;
+  period_key: string;
+  rank: number;
+  score: number;
+  total: number;
+  neighbors: ApiLeaderboardEntry[];
+}
+
+export interface ApiNotification {
+  id: string;
+  kind: NotificationKind;
+  title: string;
+  body: string;
+  payload: Record<string, unknown>;
+  read_at: string | null;
+  created_at: string;
+}
+
+export interface ApiNotificationPage {
+  unread_count: number;
+  items: ApiNotification[];
+}
