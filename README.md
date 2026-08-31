@@ -7,7 +7,7 @@ the animated bits (spring taps, progress rings, staggered lists, bottom
 sheets).
 
 Talks to the [FastAPI backend](https://github.com/i-safonoff/dothours) over
-REST — see that repo for the API and how to run it locally.
+REST and a WebSocket — see that repo for the API and how to run it locally.
 
 ## Stack
 
@@ -15,11 +15,13 @@ REST — see that repo for the API and how to run it locally.
 - Framer Motion
 - Plain `fetch` API client (`src/api/`), no state-management library — the
   screens are simple enough that `useState`/`useEffect` carry it fine
+- A thin WebSocket layer (`src/api/realtime.ts`, `RealtimeContext.tsx`) fans
+  realtime events out to whichever screen wants them
 
 ## Quickstart
 
 Requires the backend running locally (see its README — `docker compose up`
-gets you Postgres + API on `:8000`).
+gets you Postgres, Redis, and the API on `:8000`).
 
 ```bash
 npm install
@@ -41,16 +43,33 @@ npm run lint     # oxlint
 
 ```
 src/
-  api/            fetch client, typed endpoints, AuthContext
-  components/     shared UI (Shape, Building, ProgressRing, BottomSheet, TabBar, ...)
-  screens/        one screen per route (Onboarding, Auth, Tracker, City, Friends, PairedTasks, GoalSelect)
+  api/            fetch client, typed endpoints, AuthContext, realtime WebSocket layer
+  components/     shared UI (Shape, Building, ProgressRing, BottomSheet, TabBar,
+                  NotificationBell, CompanyDetail, ...)
+  screens/        one screen per route (Onboarding, Auth, Tracker, City, Friends,
+                  PairedTasks, Companies, Feed, Profile, GoalSelect)
   data/           building-family metadata (colors/shapes/titles per category)
 ```
 
 ## What's wired to the real API
 
-Auth (register/login/JWT), categories, start/stop timer with live daily
-summary, personal city (buildings leveling up from tracked hours), friends
-(request/accept, add by email), and paired tasks (create, join, log time
-toward a shared goal). Companies and the global leaderboard aren't built yet
-on the backend, so there's no UI for them here either.
+Everything the backend exposes has a screen:
+
+- **Auth** — register/login/JWT
+- **Categories, tracker** — start/stop timer, manual entries, live daily summary
+- **Personal city** — buildings leveling up from tracked hours
+- **Friends** — requests, accept/decline, add by email
+- **Paired tasks** — create, join, log time toward a shared goal
+- **Feed & profiles** — post, like, comment, public profiles
+- **Companies** — create, join by invite code, roles (owner/admin/member),
+  a shared company city, member management, invite generation
+- **World leaderboard** — all-time/weekly/monthly company rankings
+- **Notifications** — an in-app inbox with a live unread badge
+- **Realtime** — one WebSocket connection per session pushes timer, city,
+  friend, paired-task, and notification events; City, Friends, Paired Tasks,
+  and the notification badge all update live instead of only on the next
+  manual pull
+
+The isometric city layout (districts, per-building coordinates) is backend
+metadata the UI doesn't visualize yet — the existing card-grid city view
+covers the same information without a geometry rewrite.
