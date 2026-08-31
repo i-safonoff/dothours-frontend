@@ -2,7 +2,7 @@ import type { ReactElement } from 'react';
 import { motion } from 'framer-motion';
 import './TabBar.css';
 
-export type TabId = 'tracker' | 'feed' | 'city' | 'friends' | 'paired' | 'profile';
+export type TabId = 'tracker' | 'feed' | 'city' | 'friends' | 'paired' | 'companies' | 'profile';
 
 const TABS: { id: TabId; label: string; icon: (active: boolean) => ReactElement }[] = [
   {
@@ -57,6 +57,22 @@ const TABS: { id: TabId; label: string; icon: (active: boolean) => ReactElement 
           stroke={a ? '#fff' : 'var(--ink-soft)'}
           strokeWidth="2"
           strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    id: 'companies',
+    label: 'Компании',
+    icon: (a) => (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <rect x="3" y="9.5" width="7" height="11" rx="1.3" fill={a ? '#fff' : 'var(--ink-soft)'} opacity="0.7" />
+        <rect x="10.7" y="4" width="9.5" height="16.5" rx="1.5" fill={a ? '#fff' : 'var(--ink-soft)'} />
+        <path
+          d="M14 8h2.7M14 11.2h2.7M14 14.4h2.7"
+          stroke={a ? 'var(--ink)' : 'var(--bg)'}
+          strokeWidth="1.4"
+          strokeLinecap="round"
         />
       </svg>
     ),

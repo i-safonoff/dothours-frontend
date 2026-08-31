@@ -9,6 +9,7 @@ import Tracker from './screens/Tracker';
 import City from './screens/City';
 import Friends from './screens/Friends';
 import PairedTasks from './screens/PairedTasks';
+import Companies from './screens/Companies';
 import Feed from './screens/Feed';
 import Profile from './screens/Profile';
 import { AuthProvider, useAuth } from './api/AuthContext';
@@ -144,6 +145,11 @@ function AppShell() {
               {tab === 'paired' && (
                 <motion.div key="paired" className="screen-fade" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
                   <PairedTasks />
+                </motion.div>
+              )}
+              {tab === 'companies' && (
+                <motion.div key="companies" className="screen-fade" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
+                  <Companies />
                 </motion.div>
               )}
               {tab === 'profile' && (
