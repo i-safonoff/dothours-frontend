@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import ProgressRing from '../components/ProgressRing';
 import Shape from '../components/Shape';
+import NotificationBell from '../components/NotificationBell';
 import { useAuth } from '../api/AuthContext';
 import { categoriesApi, timeEntriesApi, usersApi } from '../api/endpoints';
 import { ApiError } from '../api/client';
@@ -119,6 +120,7 @@ export default function Tracker({ onEditGoals }: { onEditGoals: () => void }) {
             </motion.span>
             {stats?.streak ?? 0}
           </motion.div>
+          <NotificationBell />
           <motion.button
             className="tracker-edit-btn"
             initial={{ scale: 0 }}
