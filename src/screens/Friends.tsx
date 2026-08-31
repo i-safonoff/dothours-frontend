@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import BottomSheet from '../components/BottomSheet';
 import { friendsApi, usersApi } from '../api/endpoints';
 import { ApiError } from '../api/client';
+import { useRealtimeEvent } from '../api/RealtimeContext';
 import type { ApiFriend, ApiFriendRequest } from '../api/types';
 import './Friends.css';
 
@@ -58,6 +59,13 @@ export default function Friends({ onOpenProfile }: { onOpenProfile: (userId: str
   useEffect(() => {
     refresh().catch((err) => setError(err instanceof ApiError ? err.message : 'Не удалось загрузить друзей'));
   }, []);
+
+  useRealtimeEvent('friend.request_received', () => {
+    refresh().catch(() => {});
+  });
+  useRealtimeEvent('friend.request_accepted', () => {
+    refresh().catch(() => {});
+  });
 
   async function addFriend(e: React.FormEvent) {
     e.preventDefault();

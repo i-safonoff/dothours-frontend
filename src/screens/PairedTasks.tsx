@@ -5,6 +5,7 @@ import BottomSheet from '../components/BottomSheet';
 import { categoriesApi, friendsApi, pairedTasksApi, timeEntriesApi } from '../api/endpoints';
 import { ApiError } from '../api/client';
 import { useAuth } from '../api/AuthContext';
+import { useRealtimeEvent } from '../api/RealtimeContext';
 import { BUILDING_FAMILIES, familyMeta } from '../data/buildingFamilies';
 import type { ApiFriend, ApiPairedTask } from '../api/types';
 import type { BuildingFamilyKey } from '../types';
@@ -68,6 +69,13 @@ export default function PairedTasks() {
   useEffect(() => {
     refresh().catch((err) => setError(err instanceof ApiError ? err.message : 'Не удалось загрузить задания'));
   }, []);
+
+  useRealtimeEvent('paired_task.progress', () => {
+    refresh().catch(() => {});
+  });
+  useRealtimeEvent('paired_task.completed', () => {
+    refresh().catch(() => {});
+  });
 
   const openTask = tasks.find((t) => t.id === openId) ?? null;
 

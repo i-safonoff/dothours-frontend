@@ -5,6 +5,7 @@ import BottomSheet from '../components/BottomSheet';
 import { useAuth } from '../api/AuthContext';
 import { buildingFamiliesApi, cityApi, pairedTasksApi } from '../api/endpoints';
 import { ApiError } from '../api/client';
+import { useRealtimeEvent } from '../api/RealtimeContext';
 import { familyMeta } from '../data/buildingFamilies';
 import type { ApiBuildingFamily, ApiCityBuilding, ApiPairedTask } from '../api/types';
 import './City.css';
@@ -67,6 +68,14 @@ export default function City() {
       })
       .catch((err) => setError(err instanceof ApiError ? err.message : 'Не удалось загрузить город'));
   }, []);
+
+  useRealtimeEvent('city.building_leveled_up', (data) => {
+    if (data.owner_type !== 'user') return;
+    cityApi
+      .mine()
+      .then((city) => setBuildings(city.buildings))
+      .catch(() => {});
+  });
 
   const contributors = new Map<string, { name: string; minutes: number }>();
   let myMonumentMinutes = 0;
