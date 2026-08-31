@@ -12,6 +12,7 @@ import PairedTasks from './screens/PairedTasks';
 import Feed from './screens/Feed';
 import Profile from './screens/Profile';
 import { AuthProvider, useAuth } from './api/AuthContext';
+import { RealtimeProvider } from './api/RealtimeContext';
 import { categoriesApi } from './api/endpoints';
 
 type Stage = 'onboarding' | 'auth' | 'checking' | 'goals' | 'app';
@@ -186,7 +187,9 @@ function AppShell() {
 export default function App() {
   return (
     <AuthProvider>
-      <AppShell />
+      <RealtimeProvider>
+        <AppShell />
+      </RealtimeProvider>
     </AuthProvider>
   );
 }
