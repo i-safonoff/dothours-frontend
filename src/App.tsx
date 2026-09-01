@@ -144,7 +144,7 @@ function AppShell() {
               )}
               {tab === 'paired' && (
                 <motion.div key="paired" className="screen-fade" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
-                  <PairedTasks />
+                  <PairedTasks onGoToFriends={() => changeTab('friends')} />
                 </motion.div>
               )}
               {tab === 'companies' && (

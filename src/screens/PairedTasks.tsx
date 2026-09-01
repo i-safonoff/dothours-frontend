@@ -44,7 +44,7 @@ function RaceBar({ task, myId }: { task: ApiPairedTask; myId: string }) {
   );
 }
 
-export default function PairedTasks() {
+export default function PairedTasks({ onGoToFriends }: { onGoToFriends: () => void }) {
   const { user } = useAuth();
   const [tasks, setTasks] = useState<ApiPairedTask[]>([]);
   const [friends, setFriends] = useState<ApiFriend[]>([]);
@@ -298,40 +298,62 @@ export default function PairedTasks() {
           <p className="paired-create-label" style={{ marginBottom: 0 }}>
             Участники
           </p>
-          <div className="paired-create-friends">
-            {friends.length === 0 && <span className="paired-empty">Добавь друзей на вкладке «Друзья»</span>}
-            {friends.map((f) => {
-              const checked = participantIds.has(f.id);
-              return (
-                <button
-                  type="button"
-                  key={f.id}
-                  className="paired-create-friend"
-                  style={{ background: checked ? 'var(--ink)' : 'var(--bg)' }}
-                  onClick={() =>
-                    setParticipantIds((prev) => {
-                      const next = new Set(prev);
-                      if (next.has(f.id)) next.delete(f.id);
-                      else next.add(f.id);
-                      return next;
-                    })
-                  }
-                >
-                  <span style={{ color: checked ? '#fff' : 'var(--ink)' }}>{f.name}</span>
-                </button>
-              );
-            })}
-          </div>
+          {friends.length === 0 ? (
+            <div className="paired-no-friends">
+              <p>
+                Задание — это всегда пара: нужен хотя бы один друг, чтобы вместе прогрессировать.
+                Сначала добавь друга, потом вернись и создай задание.
+              </p>
+              <motion.button
+                type="button"
+                className="paired-detail-cta"
+                style={{ background: 'var(--ink)' }}
+                whileTap={{ scale: 0.96 }}
+                onClick={() => {
+                  setCreateOpen(false);
+                  onGoToFriends();
+                }}
+              >
+                Добавить друзей
+              </motion.button>
+            </div>
+          ) : (
+            <>
+              <div className="paired-create-friends">
+                {friends.map((f) => {
+                  const checked = participantIds.has(f.id);
+                  return (
+                    <button
+                      type="button"
+                      key={f.id}
+                      className="paired-create-friend"
+                      style={{ background: checked ? 'var(--ink)' : 'var(--bg)' }}
+                      onClick={() =>
+                        setParticipantIds((prev) => {
+                          const next = new Set(prev);
+                          if (next.has(f.id)) next.delete(f.id);
+                          else next.add(f.id);
+                          return next;
+                        })
+                      }
+                    >
+                      <span style={{ color: checked ? '#fff' : 'var(--ink)' }}>{f.name}</span>
+                    </button>
+                  );
+                })}
+              </div>
 
-          <motion.button
-            className="paired-detail-cta"
-            style={{ background: 'var(--ink)', marginTop: 8 }}
-            whileTap={{ scale: 0.96 }}
-            type="submit"
-            disabled={createBusy || participantIds.size === 0}
-          >
-            {createBusy ? 'Создаю…' : 'Создать задание'}
-          </motion.button>
+              <motion.button
+                className="paired-detail-cta"
+                style={{ background: 'var(--ink)', marginTop: 8 }}
+                whileTap={{ scale: 0.96 }}
+                type="submit"
+                disabled={createBusy || participantIds.size === 0}
+              >
+                {createBusy ? 'Создаю…' : 'Создать задание'}
+              </motion.button>
+            </>
+          )}
         </form>
       </BottomSheet>
     </div>
