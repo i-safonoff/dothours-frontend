@@ -1,5 +1,11 @@
 # .hours — frontend
 
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
+![Framer Motion](https://img.shields.io/badge/Framer%20Motion-0055FF?logo=framer&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-lightgrey)
+
 Mobile-shaped React frontend for **.hours**, a time tracker that turns tracked
 hours into a city and lets friends push each other through shared goals.
 Warm-white, dot-grid, bold-primitive-shapes visual style; Framer Motion for
